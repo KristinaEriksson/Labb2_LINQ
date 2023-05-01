@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Labb2_LINQ.Models.Course>
+@{
+    ViewData["Title"] = "GetEditCourse";
+}
+
+<h1>GetEditCourse</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseName)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                <td>
+                    <a asp-action="EditCourse" asp-route-id="@item.CourseID">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
