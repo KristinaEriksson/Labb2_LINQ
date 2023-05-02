@@ -63,13 +63,7 @@ namespace Labb2_LINQ.Controllers
             ViewBag.TeacherList = new SelectList(_context.Teachers, "TeacherID", "TeacherFirstName");
             return View(studentsList.ToList());
         }
-        ////GET: Course list 
-        //public async Task<IActionResult> GetTeacherList()
-        //{
-        //    var teachers = from t in _context.Teachers
-        //                  select t;
-        //    return View(await teachers.ToListAsync());
-        //}
+        
         [HttpGet]
         public async Task<IActionResult> EditTeacher(int id)
         {
@@ -82,11 +76,11 @@ namespace Labb2_LINQ.Controllers
                 return NotFound();
             }
 
-            var teacherName = await (from t in _context.Teachers
-                                      select t.TeacherFirstName)
-                                      .ToListAsync();
+            //var teacherName = await (from t in _context.Teachers
+            //                          select t.TeacherFirstName)
+            //                          .ToListAsync();
 
-            ViewBag.TeacherFirstName = teacherName;
+            //ViewBag.TeacherFirstName = teacherName;
             return View(teacher);
 
         }
@@ -111,7 +105,7 @@ namespace Labb2_LINQ.Controllers
                     }
 
                     teacherToUpdate.TeacherFirstName = teacher.TeacherFirstName.Trim();
-                    _context.Update(teacherToUpdate);
+                    
                     await _context.SaveChangesAsync();
                     
                 }
@@ -128,11 +122,12 @@ namespace Labb2_LINQ.Controllers
                 }
                 return RedirectToAction(nameof(StudentsInProgramming));
             }
+            ModelState.AddModelError(string.Empty, "An error occurred while saving changes.");
             return View(teacher);
         }
-        private bool TeacherExists(int TeacherID)
+        private bool TeacherExists(int teacher)
         {
-            return _context.Teachers.Any(t => t.TeacherID == TeacherID);
+            throw new NotImplementedException();
         }
         //GET: Course list 
         public async Task<IActionResult> GetEditCourse()
